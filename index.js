@@ -44,4 +44,28 @@ const bookStore = {
 }
 
 // Write your code here!
+const bookStoreTitle = document.getElementById("header");
+bookStoreTitle.textContent = bookStore.name;
+
+const bookList = document.getElementById("book-List");
+
+const deleteMe = document.getElementById("delete-this");
+if(deleteMe){
+    deleteMe.remove();
+}
+
+for (let i = 0; i < bookStore.books.length; i++) {
+  const book = bookStore.books[i];
+
+  const bookContainer = document.createElement("li");
+
+  // Notice we use book.imageUrl here to match your object!
+  bookContainer.innerHTML = `
+      <h3>${book.title}</h3>
+      <p>${book.author}</p>
+      <img src="${book.imageUrl}" alt="${book.title}">
+  `;
+
+  bookList.append(bookContainer);
+}
 
