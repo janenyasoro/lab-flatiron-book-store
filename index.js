@@ -44,28 +44,39 @@ const bookStore = {
 }
 
 // Write your code here!
-const bookStoreTitle = document.getElementById("header");
-bookStoreTitle.textContent = bookStore.name;
 
-const bookList = document.getElementById("book-List");
+// 1. Update the Header (Passes Test 1)
+// Select the h1 element with id="header" and set its text to the store name
+const header = document.querySelector('#header');
+header.textContent = bookStore.name;
 
-const deleteMe = document.getElementById("delete-this");
-if(deleteMe){
-    deleteMe.remove();
-}
+// 2. Populate the Book List (Passes Tests 2, 3, and 4)
+// Select the ul element with id="book-list"
+const bookList = document.querySelector('#book-list');
 
-for (let i = 0; i < bookStore.books.length; i++) {
-  const book = bookStore.books[i];
+// Iterate over the books array inside the bookStore object
+bookStore.books.forEach(book => {
+    // A. Create the list item <li>
+    const li = document.createElement('li');
 
-  const bookContainer = document.createElement("li");
+    // B. Create the Title (h3 or p) and add text
+    const title = document.createElement('h3');
+    title.textContent = book.title;
 
-  // Notice we use book.imageUrl here to match your object!
-  bookContainer.innerHTML = `
-      <h3>${book.title}</h3>
-      <p>${book.author}</p>
-      <img src="${book.imageUrl}" alt="${book.title}">
-  `;
+    // C. Create the Author (p) and add text
+    const author = document.createElement('p');
+    author.textContent = book.author;
 
-  bookList.append(bookContainer);
-}
+    // D. Create the Image (img) and set the src
+    const img = document.createElement('img');
+    img.src = book.imageUrl;
+    img.alt = book.title; // Optional but good practice
 
+    // E. Append elements to the list item
+    li.appendChild(title);
+    li.appendChild(author);
+    li.appendChild(img);
+
+    // F. Append the list item to the main book list
+    bookList.appendChild(li);
+});
